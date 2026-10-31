@@ -6,7 +6,7 @@ Completa missões do Discord no Windows: assiste os vídeos e "joga" os jogos da
 
 ## Como usar
 
-Coloque o `side-quest.exe` numa pasta só para ele e abra com dois cliques. Se o Windows avisar que o app não é reconhecido, clique em *Mais informações → Executar assim mesmo*.
+Coloque o `side-quest.exe` numa pasta só para ele e abra com dois cliques. Se o Windows avisar que o app não é reconhecido, clique em _Mais informações → Executar assim mesmo_.
 
 ### Missões de vídeo
 
@@ -14,7 +14,7 @@ Coloque o `side-quest.exe` numa pasta só para ele e abra com dois cliques. Se o
 2. No programa, escolha **1**.
 3. Não mexa no mouse. Ele assiste um vídeo atrás do outro.
 
-Para parar, jogue o mouse no canto superior esquerdo da tela.
+Para parar, jogue o mouse no canto superior esquerdo da tela, ou clique na janela do programa e aperte `Ctrl+C`.
 
 ### Missões de jogo
 
@@ -28,7 +28,7 @@ Se preferir, escolha **2** no passo 2 para digitar os nomes dos jogos.
 
 No final, resgate as recompensas no Discord.
 
-## Se os botões não forem reconhecidos
+## Se os botões não forem reconhecidos (só missões de vídeo)
 
 O programa já vem com prints do Discord em português. Se você usa outro idioma, tema ou tamanho de tela, recorte os botões com `Win+Shift+S` e salve na pasta `templates`, ao lado do `.exe`:
 
