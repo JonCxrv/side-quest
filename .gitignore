@@ -3,3 +3,4 @@ build/
 templates/*.png
 dist/
 *.spec
+browser-profile/

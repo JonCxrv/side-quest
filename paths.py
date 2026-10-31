@@ -4,6 +4,9 @@ from pathlib import Path
 
 # No .exe, os arquivos ficam ao lado do executável. Rodando com Python, ao lado do código.
 APP_DIR = Path(sys.executable).parent if getattr(sys, "frozen", False) else Path(__file__).parent
+# Arquivos que vêm dentro do .exe (extraídos numa pasta temporária ao abrir).
+BUNDLE_DIR = Path(getattr(sys, "_MEIPASS", Path(__file__).parent))
 
 BUILD = APP_DIR / "build"
 TEMPLATES = APP_DIR / "templates"
+DEFAULT_TEMPLATES = BUNDLE_DIR / "assets" / "templates"

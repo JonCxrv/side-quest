@@ -7,15 +7,22 @@ import numpy as np
 import pyautogui
 import pyscreeze
 
-from paths import BUILD, TEMPLATES
+from paths import BUILD, DEFAULT_TEMPLATES, TEMPLATES
 
 NOT_FOUND = (pyautogui.ImageNotFoundException, pyscreeze.ImageNotFoundException)
 
-START = TEMPLATES / "start.png"    # parte fixa do botão "Assistir" (sem o tempo)
-RESUME = TEMPLATES / "resume.png"  # botão "Continuar", de vídeos começados e não terminados
-CLAIM = TEMPLATES / "claim.png"    # botão "Reivindicar", que aparece quando a missão foi concluída
-DONE = TEMPLATES / "done.png"      # o X de fechar o vídeo (aparece quando ele abre)
-MOBILE = TEMPLATES / "mobile.png"  # título "Continue no seu telefone" (missões só de celular)
+
+def template(name):
+    """Print da pessoa em templates/, se existir; senão, o padrão que vem com o programa."""
+    custom = TEMPLATES / name
+    return custom if custom.exists() else DEFAULT_TEMPLATES / name
+
+
+START = template("start.png")    # parte fixa do botão "Assistir" (sem o tempo)
+RESUME = template("resume.png")  # botão "Continuar", de vídeos começados e não terminados
+CLAIM = template("claim.png")    # botão "Reivindicar", que aparece quando a missão foi concluída
+DONE = template("done.png")      # o X de fechar o vídeo (aparece quando ele abre)
+MOBILE = template("mobile.png")  # título "Continue no seu telefone" (missões só de celular)
 DEBUG_SHOT = BUILD / "ultimo_fim.png"
 
 CONFIDENCE = 0.85
@@ -30,7 +37,8 @@ CHANGED_FRACTION = 0.002  # fração mínima de pixels mudando para considerar q
 pyautogui.FAILSAFE = True
 
 SETUP_HELP = f"""
-Antes de usar, salve prints dos botões na pasta que vai abrir agora:
+Se os botões não forem reconhecidos (outro idioma, tema ou escala de tela),
+salve os seus próprios prints na pasta que vai abrir agora:
   {TEMPLATES}
 
 Use Win+Shift+S e salve com estes nomes:
@@ -213,11 +221,6 @@ def watch(button):
 
 def menu():
     TEMPLATES.mkdir(exist_ok=True)
-    if not all(t.exists() for t in (START, RESUME, CLAIM, DONE)):
-        print(SETUP_HELP)
-        os.startfile(TEMPLATES)
-        return
-
     print("\nDeixe a página de Missões do Discord visível na tela principal.")
     print("Para parar, jogue o mouse no canto superior esquerdo ou aperte Ctrl+C.")
     input("Enter para começar...")
@@ -229,6 +232,9 @@ def menu():
         buttons = [b for b in locate_buttons() if not any(same_spot(b, s) for s in skipped)]
         if not buttons:
             print("Nenhum botão de vídeo encontrado na tela.")
+            if done_count + len(skipped) == 0:
+                print(SETUP_HELP)
+                os.startfile(TEMPLATES)
             break
 
         button = min(buttons, key=lambda b: (b.top, b.left))
