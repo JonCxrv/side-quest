@@ -1,10 +1,12 @@
 """side-quest — ajuda a completar missões do Discord."""
+import games
 import video
 
 MENU = """
 === side-quest ===
 1. Missões de vídeo
-2. Sair
+2. Missões de jogo
+3. Sair
 """
 
 
@@ -16,6 +18,8 @@ def main():
             if choice == "1":
                 video.menu()
             elif choice == "2":
+                games.menu()
+            elif choice == "3":
                 break
         except KeyboardInterrupt:
             print("\nInterrompido. Voltando ao menu.")

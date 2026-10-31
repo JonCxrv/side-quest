@@ -4,3 +4,4 @@ templates/*.png
 dist/
 *.spec
 browser-profile/
+games/
